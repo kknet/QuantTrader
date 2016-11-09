@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantTrader.Launcher", "QuantTrader.Launcher\QuantTrader.Launcher.csproj", "{75B6CEF9-BB86-45C3-811E-6073CB6D11A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantTrader.Engine", "QuantTrader.Engine\QuantTrader.Engine.csproj", "{4D066D2F-6A2C-4253-9330-79033B55008B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75B6CEF9-BB86-45C3-811E-6073CB6D11A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75B6CEF9-BB86-45C3-811E-6073CB6D11A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75B6CEF9-BB86-45C3-811E-6073CB6D11A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75B6CEF9-BB86-45C3-811E-6073CB6D11A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D066D2F-6A2C-4253-9330-79033B55008B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D066D2F-6A2C-4253-9330-79033B55008B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D066D2F-6A2C-4253-9330-79033B55008B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D066D2F-6A2C-4253-9330-79033B55008B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
