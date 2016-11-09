@@ -4,14 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using System.Diagnostics;
-
-namespace QuantTrader.Launcher
+namespace QuantTrader.Data
 {
-    class Program
+    public class Tick
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }
