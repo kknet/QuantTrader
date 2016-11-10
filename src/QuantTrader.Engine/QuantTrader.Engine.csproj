@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataFeeds\DataReceiver.cs" />
+    <Compile Include="DataFeeds\CTPDataReceiver.cs" />
     <Compile Include="Trader\TraderHelper.cs" />
     <Compile Include="Data\Bar.cs" />
     <Compile Include="Data\Tick.cs" />
