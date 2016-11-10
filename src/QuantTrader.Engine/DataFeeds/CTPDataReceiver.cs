@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
-using QuantTrader.Data;
+using QuantTrader.Entities;
 using CTP;
 
 namespace QuantTrader.DataFeeds

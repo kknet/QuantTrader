@@ -9,7 +9,7 @@ using CTP;
 
 namespace QuantTrader.DataFeeds
 {
-    public class TraderHelper
+    public class CTPTraderHelper
     {
     }
 

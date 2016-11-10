@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuantTrader.Data
+namespace QuantTrader.Entities
 {
     public class Bar
     {
+
     }
 }
