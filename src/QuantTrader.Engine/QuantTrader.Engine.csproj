@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Configuration\QuantTraderConfig.cs" />
     <Compile Include="DataFeeds\CTPDataReceiver.cs" />
+    <Compile Include="DataFeeds\IDataProvider.cs" />
     <Compile Include="DataFeeds\IDataReceiver.cs" />
     <Compile Include="Entities\CTPAccountInfo.cs" />
     <Compile Include="Entities\Enums.cs" />
