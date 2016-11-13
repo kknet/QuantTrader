@@ -50,13 +50,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ats.Common">
-      <HintPath>..\lib\Ats.Common.dll</HintPath>
+      <HintPath>..\..\lib\Ats.Common.dll</HintPath>
     </Reference>
     <Reference Include="Ats.Core">
-      <HintPath>..\lib\Ats.Core.dll</HintPath>
+      <HintPath>..\..\lib\Ats.Core.dll</HintPath>
     </Reference>
     <Reference Include="Ats.Indicators">
-      <HintPath>..\lib\Ats.Indicators.dll</HintPath>
+      <HintPath>..\..\lib\Ats.Indicators.dll</HintPath>
+    </Reference>
+    <Reference Include="CTP, Version=1.0.5717.33796, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\CTP.dll</HintPath>
     </Reference>
     <Reference Include="StackExchange.Redis, Version=1.1.608.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\StackExchange.Redis.1.1.608\lib\net45\StackExchange.Redis.dll</HintPath>
@@ -70,8 +74,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Topshelf">
-      <HintPath>..\lib\Topshelf.dll</HintPath>
+    <Reference Include="Topshelf, Version=3.1.135.0, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Topshelf.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
