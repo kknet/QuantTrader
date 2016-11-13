@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>QuantTrader</RootNamespace>
     <AssemblyName>QuantTrader.Engine</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,7 +38,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="CTP">
-      <HintPath>..\lib\CTP.dll</HintPath>
+      <HintPath>..\..\lib\CTP.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -64,6 +65,7 @@
     <Compile Include="Entities\Enums.cs" />
     <Compile Include="QuantTraderGlobals.cs" />
     <Compile Include="QuantLogger.cs" />
+    <Compile Include="CTPMarketDataHelper.cs" />
     <Compile Include="Singleton.cs" />
     <Compile Include="Trader\CTPTraderHelper.cs" />
     <Compile Include="Entities\Bar.cs" />

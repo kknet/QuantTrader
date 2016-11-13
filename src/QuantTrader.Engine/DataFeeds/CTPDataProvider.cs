@@ -50,6 +50,11 @@ namespace QuantTrader.DataFeeds
             DoProcessMarketDataQuote();
         }
 
+        protected void OnTick(Tick tick)
+        {
+
+        }
+
         private void _loadTickData()
         {
 
@@ -103,7 +108,34 @@ namespace QuantTrader.DataFeeds
                 ThostFtdcDepthMarketDataField quote = null;
                 if(_dataReceiver.MarketDataQueue.TryDequeue(out quote))
                 {
-                    
+                    Tick tick = CTPMarketDataHelper.ConvertToTick(quote);
+                    if(_dictQuote.ContainsKey(tick.InstrumentID))
+                    {
+                        if(!_dictQuote[tick.InstrumentID].ContainsKey(tick.UpdateTime))
+                        {
+                            if (_dictQuote[tick.InstrumentID].TryAdd(tick.UpdateTime, tick))
+                            {
+                                // 添加一个Tick
+                                OnTick(tick);
+                            }
+                        }
+                        else
+                        {
+                            _dictQuote[tick.InstrumentID][tick.UpdateTime] = tick;
+                        }
+                    }
+                    else
+                    {
+                        ConcurrentDictionary<string, Tick> dict = new ConcurrentDictionary<string, Tick>();
+                        if(dict.TryAdd(tick.UpdateTime,tick))
+                        {
+                            if (_dictQuote.TryAdd(tick.InstrumentID, dict))
+                            {
+                                // 添加一个Tick
+                                OnTick(tick);
+                            }
+                        }                        
+                    }
                 }
             }
         }
@@ -123,6 +155,7 @@ namespace QuantTrader.DataFeeds
         public void SaveQuoteToCsv()
         {
             // 保存数据csv文件
+
         }
         public void Dispose()
         {
