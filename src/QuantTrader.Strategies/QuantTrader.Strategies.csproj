@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="MA_5_15_233_Long.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StrategyBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QuantTrader.Algorithm\QuantTrader.Algorithm.csproj">
