@@ -14,12 +14,17 @@ using System.IO;
 
 namespace QuantTrader.DataFeeds
 {
-    public class CTPDataReceiver
+    public class CTPDataReceiver : IDataReceiver
     {
         private static Logger _logger = LogManager.GetCurrentClassLogger();
         private CTPAccountInfo _accountInfo = null;
         private CTPMDAdapter api = new CTPMDAdapter();
-        private readonly static ConcurrentDictionary<string, List<ThostFtdcDepthMarketDataField>> _dictQuote = new ConcurrentDictionary<string, List<ThostFtdcDepthMarketDataField>>();
+        private readonly static ConcurrentQueue<ThostFtdcDepthMarketDataField> _queue = new ConcurrentQueue<ThostFtdcDepthMarketDataField>();
+        
+        public ConcurrentQueue<ThostFtdcDepthMarketDataField> MarketDataQueue
+        {
+            get { return _queue; }
+        }
 
         public CTPDataReceiver(CTPAccountInfo accountInfo)
         {
@@ -71,22 +76,8 @@ namespace QuantTrader.DataFeeds
 
         private void OnRtnDepthMarketData(ThostFtdcDepthMarketDataField pDepthMarketData)
         {
-            //string s = string.Format("{0,-6} : UpdateTime = {1}.{2:D3},  LasPrice = {3}", pDepthMarketData.InstrumentID, pDepthMarketData.UpdateTime, pDepthMarketData.UpdateMillisec, pDepthMarketData.LastPrice);
-            //Debug.WriteLine(s);
-            //Console.WriteLine(s);
-            // throw new NotImplementedException();
-
-            if(!_dictQuote.ContainsKey(pDepthMarketData.InstrumentID))
-            {
-                if(_dictQuote.TryAdd(pDepthMarketData.InstrumentID,new List<ThostFtdcDepthMarketDataField>(){pDepthMarketData}))
-                {
-
-                }
-            }
-            else
-            {
-                _dictQuote[pDepthMarketData.InstrumentID].Add(pDepthMarketData);
-            }
+            // 行情数据添加到队列
+            _queue.Enqueue(pDepthMarketData);
         }
 
         private void OnRspUserLogout(ThostFtdcUserLogoutField pUserLogout, ThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast)
@@ -148,37 +139,6 @@ namespace QuantTrader.DataFeeds
             {
                 _logger.Error(ex);
             }
-        }
-
-        public bool SaveQuoteToCsv()
-        {
-            bool isSaved = false;
-
-            foreach (KeyValuePair<string, List<ThostFtdcDepthMarketDataField>> kvp in _dictQuote)
-            {
-                var key = kvp.Key;
-                var list = kvp.Value;
-
-                using (var csv = new CsvHelper.CsvWriter(new StreamWriter(kvp.Key + "_" + "1F" + ".csv")))
-                {
-                    csv.WriteRecords(kvp.Value);
-                }
-            }
-            return isSaved;
-        }
-
-        public bool SaveQuoteToJson()
-        {
-            bool isSaved = false;
-
-            return isSaved;
-        }
-
-        public bool SaveQuoteToFile()
-        {
-            bool isSaved = false;
-
-            return isSaved;
         }
     }
 }

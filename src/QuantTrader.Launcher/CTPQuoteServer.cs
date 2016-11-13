@@ -21,6 +21,8 @@ namespace QuantTrader
         private CTPDataReceiver _dataReceiver = null;
         public CTPQuoteServer()
         {
+            QuantTraderConfig QuantTraderConfig = QuantTraderGlobals.GetInstance().QuantTraderConfig;
+
             string userID = Console.ReadLine();
             string password = Console.ReadLine();
 
@@ -68,9 +70,7 @@ namespace QuantTrader
         /// TopShelf's method delegated to <see cref="Stop()"/>.
         /// </summary>
         public bool Stop(HostControl hostControl)        
-        {
-            _dataReceiver.SaveQuoteToCsv();            
-
+        {       
             return true;
         }
     }

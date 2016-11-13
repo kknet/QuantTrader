@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace QuantTrader.Entities
 {
+    public abstract class BarData
+    {
+
+    }
     public class Bar
     {
 
