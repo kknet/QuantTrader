@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 using CTP;
 using QuantTrader.Entities;
+using System.IO;
+using CsvHelper;
 
 namespace QuantTrader.DataFeeds
 {
@@ -151,11 +153,44 @@ namespace QuantTrader.DataFeeds
             _tickThread.Start();
         }        
 
+        private string _getTickFileName(string strKey)
+        {
+            string strPath = QuantTraderGlobals.GetInstance().QuantTraderConfig.DataPath.Minute;
+            if (string.IsNullOrEmpty(strPath))
+            {
+                strPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Data\\Tick");
+                _createDir(strPath);
+            }
+            else if (strPath.Contains(':'))
+            {
+                if (!System.IO.Directory.Exists(strPath))
+                {
+                    _createDir(strPath);
+                }
+            }
+            else
+            {
+                strPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, strPath);
+                _createDir(strPath);
+            }
+
+            string fileName = Path.Combine(strPath, strKey + ".tick");
+
+            return fileName;
+        }
 
         public void SaveQuoteToCsv()
         {
             // 保存数据csv文件
+            foreach(KeyValuePair<string,ConcurrentDictionary<string,Tick>> kvp in _dictQuote)
+            {
+                string fileName = _getTickFileName(kvp.Key);
 
+                using (var csv = new CsvWriter(new StreamWriter(fileName)))
+                {
+                    csv.WriteRecords(kvp.Value);
+                }
+            }
         }
         public void Dispose()
         {
@@ -169,6 +204,36 @@ namespace QuantTrader.DataFeeds
             SaveQuoteToCsv();
 
             _dictQuote.Clear();
+        }
+
+        private bool _createDir(string filefullpath)
+        {
+
+            bool bexistfile = false;
+            if (File.Exists(filefullpath))
+            {
+                bexistfile = true;
+            }
+            else //判断路径中的文件夹是否存在
+            {
+                string dirpath = filefullpath.Substring(0, filefullpath.LastIndexOf('\\'));
+                string[] pathes = dirpath.Split('\\');
+                if (pathes.Length > 1)
+                {
+                    string path = pathes[0];
+                    for (int i = 1; i < pathes.Length; i++)
+                    {
+                        path += "\\" + pathes[i];
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+                    }
+                    bexistfile = true;
+                }
+            }
+
+            return bexistfile;
         }
     }
 }

@@ -36,7 +36,7 @@ namespace QuantTrader
 
         #endregion
 
-        public QuantTraderConfig _quantTraderConfig = null;
+        private QuantTraderConfig _quantTraderConfig = null;
 
         public QuantTraderConfig QuantTraderConfig
         {
