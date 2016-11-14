@@ -32,6 +32,8 @@ namespace QuantTrader.Configuration
 
         public DataPathConfig DataPath { get; set; }
 
+        public CTPAccountInfo AccountInfo { get; set; }        
+
         public QuantTraderConfig()
         {
             //CTPBroker defaultBroker = new CTPBroker(){ID = "4700",Name = "东海期货"};
@@ -60,6 +62,8 @@ namespace QuantTrader.Configuration
 
             // 数据默认路径
             DataPath = new DataPathConfig();
+
+            AccountInfo = new CTPAccountInfo();
         }
     }
 

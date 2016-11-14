@@ -19,15 +19,12 @@ namespace QuantTrader
     {
         private CTPAccountInfo _accountInfo = null;
         private CTPDataReceiver _dataReceiver = null;
+        private CTPDataProvider _dataProvider = null;
         public CTPQuoteServer()
         {
             QuantTraderConfig QuantTraderConfig = QuantTraderGlobals.GetInstance().QuantTraderConfig;
-
-            string userID = Console.ReadLine();
-            string password = Console.ReadLine();
-
-            _accountInfo = new CTPAccountInfo() { UserID = userID,Password = password };
-            _dataReceiver = new CTPDataReceiver(_accountInfo);
+            _dataReceiver = new CTPDataReceiver(QuantTraderConfig.AccountInfo);
+            _dataProvider = CTPDataProvider.GetInstance(_dataReceiver);
         }
 
 
@@ -38,8 +35,7 @@ namespace QuantTrader
         {
             try
             {
-                _dataReceiver.Initialize();
-                _dataReceiver.Run();
+                _dataReceiver.Initialize();                
             }
             catch (Exception e)
             {
@@ -55,6 +51,7 @@ namespace QuantTrader
         public virtual void Dispose()
         {
             // no-op for now
+            _dataProvider.Dispose();            
         }
 
 
@@ -63,14 +60,27 @@ namespace QuantTrader
         /// </summary>
         public bool Start(HostControl hostControl)
         {
-            return true;
+            try
+            {
+                _dataReceiver.Run();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }            
         }
 
         /// <summary>
         /// TopShelf's method delegated to <see cref="Stop()"/>.
         /// </summary>
         public bool Stop(HostControl hostControl)        
-        {       
+        {
+            // 保存数据
+            if(_dataReceiver != null)
+            {                
+                _dataProvider.Dispose();
+            }
             return true;
         }
     }

@@ -216,6 +216,7 @@ namespace QuantTrader.DataFeeds
             }
             else //判断路径中的文件夹是否存在
             {
+                // 递归
                 string dirpath = filefullpath.Substring(0, filefullpath.LastIndexOf('\\'));
                 string[] pathes = dirpath.Split('\\');
                 if (pathes.Length > 1)
@@ -230,6 +231,11 @@ namespace QuantTrader.DataFeeds
                         }
                     }
                     bexistfile = true;
+                }
+
+                if(!System.IO.Directory.Exists(filefullpath))
+                {
+                    Directory.CreateDirectory(filefullpath);
                 }
             }
 
